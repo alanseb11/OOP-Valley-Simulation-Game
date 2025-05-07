@@ -49,7 +49,7 @@ public class Kale extends Actor implements Monologuer, Merchant {
         monologuePool.add(new ConditionalMonologue(new SurroundingCapabilityCondition(Status.CURSED), "Rest by the flame when you can, friend. These lands will wear you thin."));
 
         // Initialise merchant offerings
-        offerings.add(new MerchantOffer(this, new Broadsword(), 150, new IncreaseMaxEffect(BaseActorAttributes.STAMINA, 20)));
+        offerings.add(new MerchantOffer(this, new Broadsword(), 150, new IncreaseMaxEffect(BaseActorAttributes.STAMINA, 30)));
     }
 
     /**
