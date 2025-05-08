@@ -53,11 +53,11 @@ public class Kale extends Actor implements Monologuer, Merchant {
 
         // Initialise merchant offerings
         offerings.add(new MerchantOffer(this, new Broadsword(), 150, 
-        new ArrayList<PurchaseEffect>(Arrays.asList(new RestoreEffect(BaseActorAttributes.STAMINA, 20)))
+        new ArrayList<PurchaseEffect>(List.of(new IncreaseMaxEffect(BaseActorAttributes.STAMINA, 30)))
         ));
 
         offerings.add(new MerchantOffer(this, new DragonslayerGreatsword(), 1700, 
-        new ArrayList<PurchaseEffect>(Arrays.asList(new RestoreEffect(BaseActorAttributes.STAMINA, 20)))
+        new ArrayList<PurchaseEffect>(List.of(new RestoreEffect(BaseActorAttributes.STAMINA, 20)))
         ));
 
     }

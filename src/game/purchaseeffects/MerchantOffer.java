@@ -1,6 +1,7 @@
 package game.purchaseeffects;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
@@ -13,7 +14,7 @@ public class MerchantOffer {
     private Merchant merchant;
     private final Purchasable item;
     private final int price;
-    private final ArrayList<PurchaseEffect> effects;
+    private final List<PurchaseEffect> effects;
 
     /**
      * Constructor.
@@ -22,11 +23,11 @@ public class MerchantOffer {
      * @param price       The price of the item
      * @param effect      The effect to be applied to the buyer
      */
-    public MerchantOffer(Merchant merchant, Purchasable item, int price, ArrayList<PurchaseEffect> effects) {
+    public MerchantOffer(Merchant merchant, Purchasable item, int price, List<PurchaseEffect> effects) {
         this.merchant = merchant;
         this.item = item;
         this.price = price;
-        this.effects = effects;
+        this.effects = new ArrayList<>(effects); // Defensive copy
     }
 
     /**
@@ -52,13 +53,20 @@ public class MerchantOffer {
         // Add the item to the buyer's inventory
         buyer.addItemToInventory((Item) item);
 
-        String effectString = "";
-
-        // Apply the effects to the buyer
-        for (PurchaseEffect effect : effects) {
-            effectString += effect.uponPurchase(buyer, map) + "\n";
+        // Apply the single effect to the buyer
+        if (effects.size() == 1) {
+            return "\"Pleasure doing business,\" grins " + merchant + " as " + buyer + " receives the " + item + ".\nInstantly, " + effects.get(0).uponPurchase(buyer, map) + ".\n";
         }
-        return "\"Pleasure doing business,\" grins " + merchant + " as " + buyer + " receives the " + item + "\nInstantly, " + effectString;
+
+        // If there are multiple effects, apply them all
+        String effectString = "";
+        for (int i = 0; i < effects.size() - 1; i++) {
+            effectString += effects.get(i).uponPurchase(buyer, map) + ",\n";
+        }
+        // Add the last effect with "and"
+        effectString += "and " + effects.get(effects.size() - 1).uponPurchase(buyer, map) + ".\n";
+
+        return "\"Pleasure doing business,\" grins " + merchant + " as " + buyer + " receives the " + item + ".\nInstantly, " + effectString;
     }
 
     public String getItem() {

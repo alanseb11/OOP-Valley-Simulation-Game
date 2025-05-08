@@ -49,6 +49,6 @@ public class SpawnEffect implements PurchaseEffect {
         Location spawnLocation = possibleLocations.get(0);
         map.addActor(actorToSpawn, spawnLocation);
         
-        return actorToSpawn + " has spawned near " + buyer + ".";
+        return actorToSpawn + " spawns near " + buyer;
     }
 }

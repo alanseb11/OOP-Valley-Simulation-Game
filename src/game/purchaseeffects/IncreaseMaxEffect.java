@@ -31,7 +31,7 @@ public class IncreaseMaxEffect implements PurchaseEffect {
     public String uponPurchase(Actor buyer, GameMap map) {
         // Increase the maximum value of the buyer
         buyer.modifyAttributeMaximum(attribute, ActorAttributeOperations.INCREASE, increaseAmount);
-        return "a surge of " + attribute.toString().toLowerCase() + " flows through " + buyer + "'s veins";
+        return buyer + "'s capacity for " + attribute.toString().toLowerCase() + " deepens";
     }
 
 }
