@@ -30,7 +30,8 @@ import java.util.Map;
  */
 public class OmenSheep extends Actor implements Curable, Producible {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-    private CountdownDecay countdown = new CountdownDecay(15); 
+    private CountdownDecay countdown = new CountdownDecay(15);
+    private CountdownDecay timeUntilProduce = new CountdownDecay(7);
 
     /**
      * Constructor.
@@ -44,6 +45,7 @@ public class OmenSheep extends Actor implements Curable, Producible {
         // Registering the behaviours for the Omen Sheep
         behaviours.put(0, new CountdownBehaviour(countdown));
         behaviours.put(1, new WanderBehaviour());
+        behaviours.put(2, new CountdownBehaviour(timeUntilProduce));
     }
 
     /**
@@ -124,7 +126,12 @@ public class OmenSheep extends Actor implements Curable, Producible {
     }
 
     @Override
-    public boolean canProduce(Actor actor, GameMap map) {
+    public boolean canProduce(Actor otherActor, GameMap map) {
+        // If there's no turns left until produce, reset the produce timer and return true
+        if (timeUntilProduce.isExpired()) {
+            timeUntilProduce.resetCountdown();
+            return true;
+        }
         return false;
     }
 

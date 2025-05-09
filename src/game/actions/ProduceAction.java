@@ -14,12 +14,11 @@ public class ProduceAction extends Action {
 
     @Override
     public String execute(Actor actor, GameMap map) {
-
-        return "";
+        return producible.produce(actor, map);
     }
 
     @Override
     public String menuDescription(Actor actor) {
-        return "";
+        return actor + " has produced.";
     }
 }

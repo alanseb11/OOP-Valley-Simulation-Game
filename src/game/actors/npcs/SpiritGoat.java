@@ -7,7 +7,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import edu.monash.fit2099.engine.positions.Location;
 import game.CountdownDecay;
 import game.actions.*;
 import game.behaviours.*;
@@ -104,7 +106,23 @@ public class SpiritGoat extends Actor implements Curable, Producible {
     }
 
     @Override
-    public boolean canProduce(Actor actor, GameMap map) {
+    public boolean canProduce(Actor otherActor, GameMap map) {
+        for (Exit exit : map.locationOf(this).getExits()) {
+            Location surrounding = exit.getDestination();
+
+            // Checks if the surrounding ground or actors are BLESSED_BY_GRACE
+            if (surrounding.getGround().hasCapability(Status.BLESSED_BY_GRACE)
+            || surrounding.getActor().hasCapability(Status.BLESSED_BY_GRACE)) {
+                return true;
+            }
+
+            // Checks if the surrounding actors have an item BLESSED_BY_GRACE
+            for (Item item: surrounding.getActor().getItemInventory()) {
+                if (item.hasCapability(Status.BLESSED_BY_GRACE)) {
+                    return true;
+                }
+            }
+        }
         return false;
     }
 
