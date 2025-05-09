@@ -16,6 +16,7 @@ import game.behaviours.*;
 import game.capabilities.Status;
 import game.grounds.Inheritree;
 import game.interfaces.Curable;
+import game.interfaces.Producible;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +28,7 @@ import java.util.Map;
  * This class was adapted from the huntsman folder in the provided base code.
  * Original source: edu/monash/fit2099/demo/huntsman/HuntsmanSpider.java
  */
-public class OmenSheep extends Actor implements Curable {
+public class OmenSheep extends Actor implements Curable, Producible {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private CountdownDecay countdown = new CountdownDecay(15); 
 
@@ -122,4 +123,13 @@ public class OmenSheep extends Actor implements Curable {
         return user + " invokes the power of the " + item + " and Inheritrees emerge in a ring around " + this;
     }
 
+    @Override
+    public boolean canProduce(Actor actor, GameMap map) {
+        return false;
+    }
+
+    @Override
+    public String produce(Actor actor, GameMap map) {
+        return "";
+    }
 }

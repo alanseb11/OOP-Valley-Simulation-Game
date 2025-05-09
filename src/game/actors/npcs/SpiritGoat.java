@@ -13,6 +13,7 @@ import game.actions.*;
 import game.behaviours.*;
 import game.capabilities.Status;
 import game.interfaces.Curable;
+import game.interfaces.Producible;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ import java.util.Map;
  * This class was adapted from the huntsman folder in the provided base code.
  * Original source: edu/monash/fit2099/demo/huntsman/HuntsmanSpider.java
  */
-public class SpiritGoat extends Actor implements Curable {
+public class SpiritGoat extends Actor implements Curable, Producible {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
     private CountdownDecay countdown = new CountdownDecay(10);
 
@@ -102,4 +103,13 @@ public class SpiritGoat extends Actor implements Curable {
         return "The " + item + " glows in " + user + "'s hand. Time rewinds for " + this + ", countdown reset to " + countdown.getCountdown();
     }
 
+    @Override
+    public boolean canProduce(Actor actor, GameMap map) {
+        return false;
+    }
+
+    @Override
+    public String produce(Actor actor, GameMap map) {
+        return "";
+    }
 }
