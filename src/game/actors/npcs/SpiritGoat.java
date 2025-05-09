@@ -88,6 +88,11 @@ public class SpiritGoat extends Actor implements Curable, Producible {
             }
         }
 
+        // Allow producing if the SpiritGoat can produce
+        if (canProduce(otherActor, map)) {
+            actions.add(new ProduceAction(this));
+        }
+
         return actions;
     }
 
@@ -128,6 +133,14 @@ public class SpiritGoat extends Actor implements Curable, Producible {
 
     @Override
     public String produce(Actor actor, GameMap map) {
-        return "";
+        for (Exit exit : map.locationOf(this).getExits()) {
+            Location surrounding = exit.getDestination();
+            // Checks for a valid spawn location in the SpiritGoat's surroundings
+            if (surrounding.canActorEnter(this)) {
+                surrounding.addActor(new SpiritGoat());
+                return this + " has produced an offspring!";
+            }
+        }
+        return this + " is stranded and has nowhere to produce an offspring!";
     }
 }
