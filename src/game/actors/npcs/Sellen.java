@@ -63,7 +63,6 @@ public class Sellen extends Actor implements Monologuer, Merchant {
         ));
 
         // DragonslayerGreatsword offering
-        // TODO: Add Golden Beetle instead of OmenSheep when possible
         offerings.add(new MerchantOffer(this, new DragonslayerGreatsword(), 1500,
                 new ArrayList<PurchaseEffect>(List.of(new SpawnEffect(new GoldenBeetle())))
         ));
