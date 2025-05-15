@@ -127,11 +127,6 @@ public class OmenSheep extends Actor implements Curable, Producible {
     }
 
     @Override
-    public boolean canProduce(Actor otherActor, GameMap map) {
-        return false;
-    }
-
-    @Override
     public String produce(Actor actor, GameMap map) {
         // Produces an egg at the GameMap position of the OmenSheep
         map.locationOf(this).addItem(new Egg());

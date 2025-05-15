@@ -56,6 +56,11 @@ public class SpiritGoat extends Actor implements Curable, Producible {
             return new UnconsciousAction();
         }
 
+        // Allow producing if the SpiritGoat can produce
+        if (canProduce(map)) {
+            return new ProduceAction(this);
+        }
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null) return action;
@@ -77,7 +82,7 @@ public class SpiritGoat extends Actor implements Curable, Producible {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         // Allow attacking if the other actor is hostile to enemies
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction));
         }
 
@@ -86,11 +91,6 @@ public class SpiritGoat extends Actor implements Curable, Producible {
             if (item.hasCapability(Status.CURATIVE)) {
                 actions.add(new CureAction(item, this));
             }
-        }
-
-        // Allow producing if the SpiritGoat can produce
-        if (canProduce(otherActor, map)) {
-            actions.add(new ProduceAction(this));
         }
 
         return actions;
@@ -111,28 +111,34 @@ public class SpiritGoat extends Actor implements Curable, Producible {
     }
 
     @Override
-    public boolean canProduce(Actor otherActor, GameMap map) {
+    public boolean canProduce(GameMap map) {
         for (Exit exit : map.locationOf(this).getExits()) {
             Location surrounding = exit.getDestination();
 
             // Checks if the surrounding ground or actors are BLESSED_BY_GRACE
-            if (surrounding.getGround().hasCapability(Status.BLESSED_BY_GRACE)
-            || otherActor.hasCapability(Status.BLESSED_BY_GRACE)) {
+            if (surrounding.getGround().hasCapability(Status.BLESSED_BY_GRACE)) {
                 return true;
             }
 
-            // Checks if the surrounding actors have an item BLESSED_BY_GRACE
-            for (Item item: otherActor.getItemInventory()) {
-                if (item.hasCapability(Status.BLESSED_BY_GRACE)) {
+            if (surrounding.containsAnActor()) {
+                if (surrounding.getActor().hasCapability(Status.BLESSED_BY_GRACE)) {
                     return true;
+                }
+                // Allow curing if the other actor has a curative item
+                for (Item item : surrounding.getActor().getItemInventory()) {
+                    if (item.hasCapability(Status.BLESSED_BY_GRACE)) {
+                        return true;
+                    }
                 }
             }
         }
+
         return false;
     }
 
     @Override
     public String produce(Actor actor, GameMap map) {
+        new Display().println("PPPPPPPPPPP");
         for (Exit exit : map.locationOf(this).getExits()) {
             Location surrounding = exit.getDestination();
             // Checks for a valid spawn location in the SpiritGoat's surroundings
