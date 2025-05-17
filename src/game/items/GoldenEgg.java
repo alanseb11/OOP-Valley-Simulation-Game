@@ -42,7 +42,7 @@ public class GoldenEgg extends Egg implements Eatable {
     }
 
     @Override
-    public String eatenBy(Actor actor, GameMap map){
+    public String eatenBy(Actor actor, GameMap map) {
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,20);
         actor.removeItemFromInventory(this);
         return actor + " consumes the Golden Egg and restores 20 stamina!";

@@ -10,11 +10,14 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
+import game.CountdownDecay;
 import game.actions.EatAction;
 import game.capabilities.Status;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
+import game.behaviours.CountdownBehaviour;
 import game.interfaces.Eatable;
+import game.interfaces.Producible;
 import game.items.GoldenEgg;
 
 /**
@@ -24,25 +27,23 @@ import game.items.GoldenEgg;
  * followable actors such as the Player. They are also edible by the Player, granting healing and runes.
  * </p>
  */
+public class GoldenBeetle extends Actor implements Eatable, Producible {
 
-public class GoldenBeetle extends Actor implements Eatable {
-
-    private int turnsSinceLastEgg = 0;
-    private Actor followTarget = null;
     private final Map<Integer, Behaviour> behaviours = new HashMap<>();
+    private final CountdownDecay timeUntilLay = new CountdownDecay(5);
 
     /**
-     * Constructs a new Golden Beetle with 25 HP and assigns its initial Wander behaviour.
+     * Constructs a new Golden Beetle with 25 HP and assigns its initial behaviours.
      */
     public GoldenBeetle() {
         super("Golden Beetle", 'b', 25);
+        behaviours.put(0, new CountdownBehaviour(timeUntilLay));
         behaviours.put(2, new WanderBehaviour());
     }
 
     /**
      * Defines the Golden Beetle's turn-based behavior.
      * <ul>
-     *     <li>Lays a Golden Egg every 5 turns.</li>
      *     <li>Searches for a nearby followable actor and initiates follow behaviour.</li>
      *     <li>Executes the highest-priority available behaviour action.</li>
      * </ul>
@@ -51,29 +52,16 @@ public class GoldenBeetle extends Actor implements Eatable {
      * @param lastAction Last action performed by this actor.
      * @param map        The current game map.
      * @param display    Display to show any output.
-     * @return The action to perform, or null if egg was laid.
+     * @return The action to perform.
      */
-
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        turnsSinceLastEgg++;
-
-        if (turnsSinceLastEgg >=5) {
-            map.locationOf(this).addItem(new GoldenEgg());
-            turnsSinceLastEgg = 0;
-            display.println(this + " has laid a Golden Egg");
-            return null;
-        }
-
-        if (followTarget == null) {
-            Location here = map.locationOf(this);
-            for (Exit exit : here.getExits()) {
-                Actor potentialTarget = exit.getDestination().getActor();
-                if (potentialTarget != null && potentialTarget.hasCapability(Status.FOLLOWABLE)) {
-                    followTarget = potentialTarget;
-                    behaviours.put(1, new FollowBehaviour(followTarget));
-                    break;
-                }
+        Location here = map.locationOf(this);
+        for (Exit exit : here.getExits()) {
+            Actor potentialTarget = exit.getDestination().getActor();
+            if (potentialTarget != null && potentialTarget.hasCapability(Status.FOLLOWABLE)) {
+                behaviours.put(1, new FollowBehaviour(potentialTarget));
+                break;
             }
         }
 
@@ -125,4 +113,25 @@ public class GoldenBeetle extends Actor implements Eatable {
         return actions;
     }
 
+    /**
+     * Indicates if the Golden Beetle can produce an egg.
+     * Uses a countdown timer to control egg laying every 5 turns.
+     */
+    @Override
+    public boolean canProduce(Actor actor, GameMap map) {
+        if (timeUntilLay.isExpired()) {
+            timeUntilLay.resetCountdown();
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Spawns a Golden Egg on the beetle's location.
+     */
+    @Override
+    public String produce(Actor actor, GameMap map) {
+        map.locationOf(this).addItem(new GoldenEgg());
+        return this + " has laid a Golden Egg!";
+    }
 }
