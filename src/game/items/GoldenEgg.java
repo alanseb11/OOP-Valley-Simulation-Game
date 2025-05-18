@@ -1,10 +1,12 @@
 package game.items;
+import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.Actor;
+import game.actions.EatAction;
 import game.actors.npcs.GoldenBeetle;
 import game.capabilities.Status;
 import game.interfaces.Eatable;
@@ -17,7 +19,6 @@ public class GoldenEgg extends Egg implements Eatable {
 
     @Override
     public void tick(Location currentLocation) {
-
         //This checks whether the egg is still on the ground
         if (!currentLocation.getItems().contains(this)) {
             return;

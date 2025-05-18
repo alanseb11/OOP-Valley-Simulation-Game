@@ -26,14 +26,23 @@ public class Egg extends Item implements Eatable {
     }
 
     @Override
-    public void tick(Location currentLocation, Actor actor) {
-        if (actor.getItemInventory().contains(this)) {
-            timeUntilHatch.resetCountdown();
-            return;
-        }
+    public void tick(Location currentLocation) {
         if (canHatch(hatch)) {
             String execute = hatch.execute(currentLocation, hatched);
             new Display().println(execute);
+        }
+    }
+
+    /**
+     * Inform a carried Item of the passage of time.
+     *
+     * This method is called once per turn, if the Item is being carried.
+     * @param currentLocation The location of the actor carrying this Item.
+     * @param actor The actor carrying this Item.
+     */
+    public void tick(Location currentLocation, Actor actor) {
+        if (actor.getItemInventory().contains(this)) {
+            timeUntilHatch.resetCountdown();
         }
     }
 

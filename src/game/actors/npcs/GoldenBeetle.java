@@ -10,7 +10,7 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
-import game.CountdownDecay;
+import game.Countdown;
 import game.actions.EatAction;
 import game.capabilities.Status;
 import game.behaviours.FollowBehaviour;
@@ -28,9 +28,11 @@ import game.items.GoldenEgg;
  * </p>
  */
 public class GoldenBeetle extends Actor implements Eatable, Producible {
-
+    private int health = 25;
+    private int turnsSinceLastEgg = 0;
+    private Actor followTarget = null;
     private final Map<Integer, Behaviour> behaviours = new HashMap<>();
-    private final CountdownDecay timeUntilLay = new CountdownDecay(5);
+    private final Countdown timeUntilLay = new Countdown(5);
 
     /**
      * Constructs a new Golden Beetle with 25 HP and assigns its initial behaviours.
@@ -118,7 +120,7 @@ public class GoldenBeetle extends Actor implements Eatable, Producible {
      * Uses a countdown timer to control egg laying every 5 turns.
      */
     @Override
-    public boolean canProduce(Actor actor, GameMap map) {
+    public boolean canProduce(GameMap map) {
         if (timeUntilLay.isExpired()) {
             timeUntilLay.resetCountdown();
             return true;
