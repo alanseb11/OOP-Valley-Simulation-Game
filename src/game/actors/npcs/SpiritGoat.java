@@ -7,12 +7,15 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.CountdownDecay;
+import edu.monash.fit2099.engine.positions.Location;
+import game.Countdown;
 import game.actions.*;
 import game.behaviours.*;
 import game.capabilities.Status;
 import game.interfaces.Curable;
+import game.interfaces.Producible;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,9 +27,9 @@ import java.util.Map;
  * This class was adapted from the huntsman folder in the provided base code.
  * Original source: edu/monash/fit2099/demo/huntsman/HuntsmanSpider.java
  */
-public class SpiritGoat extends Actor implements Curable {
+public class SpiritGoat extends Actor implements Curable, Producible {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-    private CountdownDecay countdown = new CountdownDecay(10);
+    private Countdown countdown = new Countdown(10, new UnconsciousAction());
 
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
@@ -53,6 +56,11 @@ public class SpiritGoat extends Actor implements Curable {
             return new UnconsciousAction();
         }
 
+        // Allow producing if the SpiritGoat can produce
+        if (canProduce(map)) {
+            return new ProduceAction(this);
+        }
+
         for (Behaviour behaviour : behaviours.values()) {
             Action action = behaviour.getAction(this, map);
             if (action != null) return action;
@@ -74,7 +82,7 @@ public class SpiritGoat extends Actor implements Curable {
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
         ActionList actions = new ActionList();
         // Allow attacking if the other actor is hostile to enemies
-        if(otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
+        if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)){
             actions.add(new AttackAction(this, direction));
         }
 
@@ -102,4 +110,43 @@ public class SpiritGoat extends Actor implements Curable {
         return "The " + item + " glows in " + user + "'s hand. Time rewinds for " + this + ", countdown reset to " + countdown.getCountdown();
     }
 
+    @Override
+    public boolean canProduce(GameMap map) {
+        for (Exit exit : map.locationOf(this).getExits()) {
+            Location surrounding = exit.getDestination();
+
+            // Checks if the surrounding ground or actors are BLESSED_BY_GRACE
+            if (surrounding.getGround().hasCapability(Status.BLESSED_BY_GRACE)) {
+                return true;
+            }
+
+            if (surrounding.containsAnActor()) {
+                if (surrounding.getActor().hasCapability(Status.BLESSED_BY_GRACE)) {
+                    return true;
+                }
+                // Allow curing if the other actor has a curative item
+                for (Item item : surrounding.getActor().getItemInventory()) {
+                    if (item.hasCapability(Status.BLESSED_BY_GRACE)) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public String produce(Actor actor, GameMap map) {
+        new Display().println("PPPPPPPPPPP");
+        for (Exit exit : map.locationOf(this).getExits()) {
+            Location surrounding = exit.getDestination();
+            // Checks for a valid spawn location in the SpiritGoat's surroundings
+            if (surrounding.canActorEnter(this)) {
+                surrounding.addActor(new SpiritGoat());
+                return this + " has produced an offspring!";
+            }
+        }
+        return this + " is stranded and has nowhere to produce an offspring!";
+    }
 }
