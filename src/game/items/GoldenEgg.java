@@ -11,7 +11,6 @@ import game.interfaces.Eatable;
 
 public class GoldenEgg extends Egg implements Eatable {
 
-
     public GoldenEgg() {
         super();
     }

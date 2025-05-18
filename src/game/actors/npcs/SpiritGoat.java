@@ -138,7 +138,6 @@ public class SpiritGoat extends Actor implements Curable, Producible {
 
     @Override
     public String produce(Actor actor, GameMap map) {
-        new Display().println("PPPPPPPPPPP");
         for (Exit exit : map.locationOf(this).getExits()) {
             Location surrounding = exit.getDestination();
             // Checks for a valid spawn location in the SpiritGoat's surroundings
