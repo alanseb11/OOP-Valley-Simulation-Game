@@ -14,6 +14,7 @@ import edu.monash.fit2099.engine.positions.Location;
 import game.Countdown;
 import game.actions.EatAction;
 import game.actions.ProduceAction;
+import game.actors.npcs.types.AttackableNPC;
 import game.capabilities.Status;
 import game.behaviours.FollowBehaviour;
 import game.behaviours.WanderBehaviour;
@@ -38,7 +39,7 @@ import game.items.GoldenEgg;
  *
  * This class implements {@link Eatable} and {@link Producible} to enable custom logic for consumption and egg production.
  */
-public class GoldenBeetle extends Actor implements Eatable, Producible {
+public class GoldenBeetle extends AttackableNPC implements Eatable, Producible {
     private final Map<Integer, Behaviour> behaviours = new HashMap<>();
   
     /**
@@ -50,7 +51,6 @@ public class GoldenBeetle extends Actor implements Eatable, Producible {
     public GoldenBeetle() {
         super("Golden Beetle", 'b', 25);
         behaviours.put(0, new CountdownBehaviour(new Countdown(5), new ProduceAction(this)));
-        behaviours.put(2, new WanderBehaviour());
     }
 
     /**
@@ -80,14 +80,7 @@ public class GoldenBeetle extends Actor implements Eatable, Producible {
             }
         }
 
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null) {
-                return action;
-            }
-        }
-
-        return null;
+        return super.playTurn(actions, lastAction, map, display);
     }
 
     /**
@@ -130,10 +123,9 @@ public class GoldenBeetle extends Actor implements Eatable, Producible {
      */
     @Override
     public ActionList allowableActions(Actor otherActor, String direction, GameMap map) {
-        ActionList actions = new ActionList();
+        ActionList actions = super.allowableActions(otherActor, direction, map);
         if (otherActor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actions.add(new EatAction(this));
-            actions.add(new AttackAction(this, direction));
         }
         return actions;
     }

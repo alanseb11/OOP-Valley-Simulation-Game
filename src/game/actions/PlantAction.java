@@ -18,7 +18,7 @@ public class PlantAction extends Action {
     /**
      * Constructor.
      *
-     * @param seed the item to plant
+     * @param seed the {@Plantable} to plant
      */
     public PlantAction(Plantable seed) {
         this.seed = seed;

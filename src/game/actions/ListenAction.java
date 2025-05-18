@@ -3,21 +3,21 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.interfaces.Monologuer;
+import game.actors.npcs.types.MonologuingNPC;
 
 /**
  * Represents an action where an {@link Actor} listens to a {@link Monologuer}.
  * This action allows the actor to hear the monologue of the specified monologuer.
  */
 public class ListenAction extends Action {
-    private Monologuer monologuer;
+    private MonologuingNPC monologuer;
 
     /**
      * Constructor.
      *
      * @param monologuer The monologue to be spoken
      */
-    public ListenAction(Monologuer monologuer) {
+    public ListenAction(MonologuingNPC monologuer) {
         this.monologuer = monologuer;
     }
 
