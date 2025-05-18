@@ -2,6 +2,7 @@ package game.items;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
@@ -19,12 +20,14 @@ public abstract class Egg extends Item implements Eatable {
      * A value canHatch which has a default value of true.
      */
     protected boolean canHatch = true;
+    private final Actor hatched;
 
     /***
      * Constructor.
      */
-    public Egg() {
-        super("Egg", '0', true);
+    public Egg(String name, char displayChar, boolean portable, Actor hatched) {
+        super(name, displayChar, portable);
+        this.hatched = hatched;
     }
 
     /**
@@ -50,6 +53,8 @@ public abstract class Egg extends Item implements Eatable {
      */
     public void hatch(Location location) {
         location.removeItem(this);
+        location.addActor(hatched);
+        new Display().println("The " + this + " hatches into a " + hatched + "!");
     }
     
 }

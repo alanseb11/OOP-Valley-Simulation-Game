@@ -30,8 +30,6 @@ import java.util.Map;
  */
 public class OmenSheep extends Actor implements Curable, Producible {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-    private Countdown countdownDecay = new Countdown(15, new UnconsciousAction());
-    private Countdown timeUntilProduce = new Countdown(7, new ProduceAction(this));
 
     /**
      * Constructor.
@@ -43,8 +41,8 @@ public class OmenSheep extends Actor implements Curable, Producible {
         this.addCapability(Status.NON_HOSTILE_TO_ENEMY);
 
         // Registering the behaviours for the Omen Sheep
-        behaviours.put(0, new CountdownBehaviour(countdownDecay));
-        behaviours.put(1, new CountdownBehaviour(timeUntilProduce));
+        behaviours.put(0, new CountdownBehaviour(new Countdown(15), new UnconsciousAction()));
+        behaviours.put(1, new CountdownBehaviour(new Countdown(7), new ProduceAction(this)));
         behaviours.put(2, new WanderBehaviour());
     }
 

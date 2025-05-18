@@ -39,10 +39,8 @@ import game.items.GoldenEgg;
  * This class implements {@link Eatable} and {@link Producible} to enable custom logic for consumption and egg production.
  */
 public class GoldenBeetle extends Actor implements Eatable, Producible {
-
     private final Map<Integer, Behaviour> behaviours = new HashMap<>();
-    private final Countdown timeUntilLay = new Countdown(5, new ProduceAction(this));
-
+  
     /**
      * Constructs a Golden Beetle with 25 HP.
      *
@@ -51,7 +49,7 @@ public class GoldenBeetle extends Actor implements Eatable, Producible {
      */
     public GoldenBeetle() {
         super("Golden Beetle", 'b', 25);
-        behaviours.put(0, new CountdownBehaviour(timeUntilLay));
+        behaviours.put(0, new CountdownBehaviour(new Countdown(5), new ProduceAction(this)));
         behaviours.put(2, new WanderBehaviour());
     }
 

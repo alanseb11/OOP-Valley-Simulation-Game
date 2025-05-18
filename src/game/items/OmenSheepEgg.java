@@ -3,7 +3,6 @@ package game.items;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.attributes.ActorAttributeOperations;
 import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
-import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
 import game.Countdown;
@@ -17,13 +16,12 @@ import game.actors.npcs.OmenSheep;
  */
 public class OmenSheepEgg extends Egg {
     private final Countdown timeUntilHatch = new Countdown(3);
-    private final OmenSheep hatched = new OmenSheep();
 
     /**
      * Constructor.
      */
     public OmenSheepEgg() {
-        super();
+        super("Egg", 'e', true, new OmenSheep());
     }
 
     /**
@@ -49,8 +47,8 @@ public class OmenSheepEgg extends Egg {
     public void tick(Location currentLocation) {
         if (timeUntilHatch.isExpired() && !currentLocation.containsAnActor()) {
             hatch(currentLocation);
-        } else if (!timeUntilHatch.isExpired()) {
-            timeUntilHatch.applyToItem(this, "hatching");
+        } else {
+            timeUntilHatch.applyTo(this, "hatching");
         }
     }
 
@@ -66,18 +64,7 @@ public class OmenSheepEgg extends Egg {
     public String eatenBy(Actor actor, GameMap map) {
         actor.modifyAttribute(BaseActorAttributes.HEALTH, ActorAttributeOperations.INCREASE,10);
         actor.removeItemFromInventory(this);
-        return actor + " consumes the Egg and restores 10 health!";
+        return actor + " consumes the " + this + " and restores 10 health!";
     }
 
-    /**
-     * Hatches the egg into an {@link OmenSheep} at the location of the egg.
-     *
-     * @param location The location where the egg hatches.
-     */
-    @Override
-    public void hatch(Location location) {
-        super.hatch(location);
-        location.addActor(hatched);
-        new Display().println(this + " has hatched into an " + hatched);
-    }
 }

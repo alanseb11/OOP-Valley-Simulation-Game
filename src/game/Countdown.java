@@ -1,36 +1,19 @@
 package game;
 
-import edu.monash.fit2099.engine.actions.Action;
-import edu.monash.fit2099.engine.actions.DoNothingAction;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 
 /**
- * Represents a countdown effect that decreases over time.
- * 
- * The countdown value decreases with each turn, and when it reaches zero, the actor succumbs to the Crimson Rot.
+ * Represents a countdown that decreases over time.
  */
 public class Countdown {
     private int countdown;
     private final int initialCountdown;
-    private Action action = new DoNothingAction();
 
     /**
-     * Constructs a {@code CountdownDecay} with the specified initial countdown value,
-     * as well as the {@link Action} to be performed at the end of the countdown.
+     * Constructs a {@code Countdown} with the specified initial countdown value,
      * 
-     * @param initial_countdown The initial countdown value
-     */
-    public Countdown(int initial_countdown, Action action) {
-        this.countdown = initial_countdown;
-        this.initialCountdown = initial_countdown;
-        this.action = action;
-    }
-
-    /**
-     * Constructs a {@code CountdownDecay} with the specified initial countdown value.
-     *
      * @param initial_countdown The initial countdown value
      */
     public Countdown(int initial_countdown) {
@@ -55,18 +38,9 @@ public class Countdown {
     }
 
     /**
-     * Gets the current action.
-     *
-     * @return The current action
-     */
-    public Action getAction() {
-        return action;
-    }
-
-    /**
      * Decrements the countdown value by 1.
      */
-    public void decrement() {
+    private void decrement() {
         countdown--;
     }
 
@@ -84,11 +58,11 @@ public class Countdown {
      * This method decrements the countdown and prints a message indicating the actor's remaining turns
      * before an action occurs.
      * 
-     * @param actor The actor to whom the countdown effect is applied
+     * @param actor The actor to whom the countdown is applied
+     * @param action The action to be performed when the countdown expires
      */
-    public void applyTo(Actor actor) {
-        Display display = new Display();
-        display.println(actor + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + action.menuDescription(actor));
+    public void applyTo(Actor actor, String action) {
+        new Display().println(actor + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + action);
         decrement();
     }
 
@@ -96,11 +70,11 @@ public class Countdown {
      * Applies the countdown effect to the specified item.
      * This method decrements the countdown and prints a message indicating the remaining turns.
      *
-     * @param item The item to which the countdown effect is applied
+     * @param item The item to which the countdown is applied
+     * @param action The action to be performed when the countdown expires
      */
-    public void applyToItem(Item item, String effect) {
-        Display display = new Display();
-        display.println(item + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + effect);
+    public void applyTo(Item item, String action) {
+        new Display().println(item + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + action);
         decrement();
     }
 

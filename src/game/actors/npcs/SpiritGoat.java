@@ -30,14 +30,14 @@ import java.util.Map;
  */
 public class SpiritGoat extends Actor implements Curable, Producible {
     private Map<Integer, Behaviour> behaviours = new HashMap<>();
-    private Countdown countdown = new Countdown(10, new UnconsciousAction());
+    private Countdown rotCountdown = new Countdown(10);
 
     public SpiritGoat() {
         super("Spirit Goat", 'y', 50);
         this.addCapability(Status.NON_HOSTILE_TO_ENEMY);
         
         // Registering the behaviours for the Spirit Goat
-        behaviours.put(0, new CountdownBehaviour(countdown));
+        behaviours.put(0, new CountdownBehaviour(rotCountdown, new UnconsciousAction()));
         behaviours.put(1, new WanderBehaviour());
     }
 
@@ -107,8 +107,8 @@ public class SpiritGoat extends Actor implements Curable, Producible {
      */
     @Override
     public String beCuredBy(Item item, Actor user, GameMap map) {
-        countdown.resetCountdown();
-        return "The " + item + " glows in " + user + "'s hand. Time rewinds for " + this + ", countdown reset to " + countdown.getCountdown();
+        rotCountdown.resetCountdown();
+        return "The " + item + " glows in " + user + "'s hand. Time rewinds for " + this + ", countdown reset to " + rotCountdown.getCountdown();
     }
 
     /**

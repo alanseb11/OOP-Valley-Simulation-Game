@@ -8,18 +8,21 @@ import game.Countdown;
 
 /**
  * A behaviour that applies a countdown effect to an actor.
- * If the countdown expires, the actor becomes unconscious.
+ * If the countdown expires, the actor will perform a specific action.
  */
 public class CountdownBehaviour implements Behaviour {
     private Countdown countdown;
+    private Action action;
 
     /**
      * Constructs a CountdownBehaviour with the specified countdown.
      *
      * @param countdown The CountdownDecay object representing the countdown
+     * @param action    The action to be performed when the countdown expires
      */
-    public CountdownBehaviour(Countdown countdown) {
+    public CountdownBehaviour(Countdown countdown, Action action) {
         this.countdown = countdown;
+        this.action = action;
     }
 
     /**
@@ -34,9 +37,9 @@ public class CountdownBehaviour implements Behaviour {
     public Action getAction(Actor actor, GameMap map) {
         if (countdown.isExpired()) {
             countdown.resetCountdown();
-            return countdown.getAction();
+            return action;
         }
-        countdown.applyTo(actor);
+        countdown.applyTo(actor, action.menuDescription(actor));
         return null;
     }
 

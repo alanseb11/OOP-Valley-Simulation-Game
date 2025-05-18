@@ -40,6 +40,6 @@ public class ProduceAction extends Action {
      */
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " produces.";
+        return actor + " produces";
     }
 }

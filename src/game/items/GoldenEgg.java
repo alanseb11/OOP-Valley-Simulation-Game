@@ -8,7 +8,6 @@ import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.actors.Actor;
 import game.actors.npcs.GoldenBeetle;
 import game.capabilities.Status;
-import game.interfaces.Eatable;
 import game.monologueconditions.SurroundingCapabilityCondition;
 
 /**
@@ -19,19 +18,13 @@ import game.monologueconditions.SurroundingCapabilityCondition;
  * it becomes unable to hatch.
  * </p>
  */
-public class GoldenEgg extends Egg implements Eatable {
-
-    /**
-     * The Golden Beetle instance that this egg will hatch into.
-     */
-    private GoldenBeetle hatched = new GoldenBeetle();
+public class GoldenEgg extends Egg {
 
     /**
      * Constructor for GoldenEgg.
-     * Inherits name, display character, and portability from {@link Egg}.
      */
     public GoldenEgg() {
-        super();
+        super("Golden Egg", '0', true, new GoldenBeetle());
     }
 
     /**
@@ -77,17 +70,7 @@ public class GoldenEgg extends Egg implements Eatable {
     public String eatenBy(Actor actor, GameMap map) {
         actor.modifyAttribute(BaseActorAttributes.STAMINA, ActorAttributeOperations.INCREASE,20);
         actor.removeItemFromInventory(this);
-        return actor + " consumes the Golden Egg and restores 20 stamina!";
+        return actor + " consumes the " + this + " and restores 20 stamina!";
     }
 
-    /**
-     * Hatches the Golden Egg into a {@link GoldenBeetle} and places it at the specified location.
-     *
-     * @param location The map location where the egg hatches.
-     */
-    @Override
-    public void hatch(Location location) {
-        super.hatch(location);
-        location.addActor(hatched);
-    }
 }
