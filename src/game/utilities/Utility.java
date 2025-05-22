@@ -1,4 +1,4 @@
-package game;
+package game.utilities;
 
 /**
  * Utility class where extra game-related utility methods are.

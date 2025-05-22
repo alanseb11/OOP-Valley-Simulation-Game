@@ -3,8 +3,8 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.Utility;
-import game.interfaces.Plantable;
+import game.items.plants.Plantable;
+import game.utilities.Utility;
 
 /**
  * An action that allows an actor to plant a seed in the game.
