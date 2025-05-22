@@ -11,6 +11,9 @@ import game.actors.Player;
 import game.actors.npcs.*;
 import game.grounds.*;
 import game.items.*;
+import game.items.plants.BloodroseSeed;
+import game.items.plants.InheritreeSeed;
+import game.utilities.FancyMessage;
 
 /**
  * The main class to setup and run the game.
