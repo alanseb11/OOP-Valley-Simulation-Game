@@ -11,11 +11,15 @@
 ```
 
 2. A day/night system that consists of morning/afternoon/evening/night. Each time of day has different effects on the world. For example, at night, certain enemies are more aggressive, dealing greater damage to the farmer.
+
 Morning (1 round) -> performing any action costs the Farmer less stamina?
+
 Afternoon (1 round) -> merchant offers available only during this period
+
 Night (2 round) -> certain enemies are more aggressive
 
 4. Realistic farming system. For instance, plants need to be watered, grounds can be shovelled, etc.
+
 Seed A -> Crop A
 once planted on soil, grow after X turns on its own. If watered Y times before it blooms into crop form, then it will produce twice the amount
 
