@@ -8,6 +8,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.TimeManager;
 import game.actions.UnconsciousAction;
 import game.capabilities.Status;
 import game.utilities.FancyMessage;
@@ -20,6 +21,8 @@ import game.weapons.BareFist;
  * and can perform actions based on user input via a menu.
  */
 public class Player extends Actor {
+    private final TimeManager timeManager = new TimeManager();
+
     /**
      * Constructor.
      *
@@ -32,7 +35,6 @@ public class Player extends Actor {
         super(name, displayChar, hitPoints);
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
         this.addCapability(Status.HOSTILE_TO_ENEMY);
-        this.addCapability(Status.PLAYER);
         this.addCapability(Status.FOLLOWABLE);
         this.setIntrinsicWeapon(new BareFist());
     }
@@ -65,6 +67,8 @@ public class Player extends Actor {
             }
             return new UnconsciousAction();
         }
+
+        timeManager.tick();
 
         // Handle multi-turn Actions
         if (lastAction.getNextAction() != null)

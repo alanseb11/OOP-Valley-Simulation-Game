@@ -10,6 +10,7 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.TimeManager;
 import game.actions.UnconsciousAction;
 import game.behaviours.WanderBehaviour;
 
@@ -24,6 +25,7 @@ public abstract class NPC extends Actor {
      * The value is the Behaviour itself.
      */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
+    protected final TimeManager timeManager = new TimeManager();
 
     /**
      * Constructor for NPC.
