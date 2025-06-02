@@ -1,28 +1,54 @@
-package game;
+package game.grounds;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Ground;
 import edu.monash.fit2099.engine.positions.Location;
-import game.actions.CureAction;
 import game.actions.TeleportAction;
-import game.capabilities.Status;
-import java.util.*;
 
+/**
+ * A special type of ground that allows actors to teleport between different locations or maps.
+ * TeleportationCircle creates a network of connected points in the game world that actors can use
+ * to quickly move between distant locations.
+ * 
+ * Each TeleportationCircle has:
+ * - A current location and map where it exists
+ * - A destination location and map where it will transport actors to
+ * - The ability to offer a TeleportAction to actors standing on it
+ * 
+ * The teleportation network is bidirectional, typically requiring two circles to be set up:
+ * - One circle at the source location
+ * - Another circle at the destination location
+ * Each circle should be configured to teleport to the other's location.
+ */
 public class TeleportationCircle extends Ground {
 
+    /**
+     * The location where this teleportation circle is placed
+     */
     private Location location;
+
+    /**
+     * The map containing this teleportation circle
+     */
     private GameMap currentMap;
+
+    /**
+     * The map that this circle teleports to
+     */
     private GameMap destinationMap;
+
+    /**
+     * The specific location on the destination map that actors will be teleported to
+     */
     private Location destinationLocation;
 
     /**
-     * Constructor.
+     * Creates a new TeleportationCircle.
      *
-     * @param displayChar character to display for this type of terrain
-     * @param name
+     * @param displayChar character to display for this type of terrain (unused, always 'A')
+     * @param name the name of the circle (unused, always "Teleportation Circle")
      */
     public TeleportationCircle(char displayChar, String name) {
         super('A', "Teleportation Circle");
@@ -87,6 +113,17 @@ public class TeleportationCircle extends Ground {
         return this.destinationLocation;
     }
 
+    /**
+     * Returns a list of actions available to an actor standing on this circle.
+     * If the actor is on the circle and a valid destination has been set,
+     * they will be offered a TeleportAction to move to the destination.
+     *
+     * @param actor the Actor acting
+     * @param location the current Location
+     * @param direction the direction of the Ground from the Actor
+     * @return a new collection of Actions
+     */
+    @Override
     public ActionList allowableActions(Actor actor, Location location, String direction) {
         ActionList actions = new ActionList();
         // Check if the actor is on the same location as the teleport circle
@@ -96,5 +133,4 @@ public class TeleportationCircle extends Ground {
         }
         return actions;
     }
-
 }
