@@ -53,6 +53,15 @@ public class Countdown {
     }
 
     /**
+     * Delays the countdown by a specified number of turns.
+     * 
+     * @param turns The number of turns to delay the countdown
+     */
+    public void delay(int turns) {
+        countdown += turns;
+    }
+
+    /**
      * Applies the countdown effect to the specified actor.
      * This method decrements the countdown and prints a message indicating the actor's remaining turns
      * before an action occurs.

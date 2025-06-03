@@ -90,6 +90,17 @@ public class SpiritGoat extends AttackableNPC implements Curable, Producible {
     }
 
     /**
+     * Returns the stamina cost for curing the Spirit Goat.
+     *
+     * @param actor The actor performing the curing action
+     * @return The stamina cost for curing the Spirit Goat
+     */
+    @Override
+    public int getStaminaCost(Actor actor) {
+        return 0; // Spirit Goat does not require stamina to cure
+    }
+
+    /**
      * Checks if the {@link SpiritGoat} can produce.
      *
      * @param map The map containing the actor.

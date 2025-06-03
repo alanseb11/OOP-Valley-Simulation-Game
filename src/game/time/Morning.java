@@ -16,6 +16,7 @@ public class Morning extends TimeOfDay {
 
     public void applyEffect(Actor actor, GameMap map) {
         if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
+            actor.addCapability(Status.BUFFED);
             actor.removeCapability(Ability.PURCHASE);
         }
 

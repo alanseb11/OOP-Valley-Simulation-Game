@@ -14,5 +14,6 @@ public enum Status {
     CURATIVE,
     BLESSED_BY_GRACE,
     FOLLOWABLE,
-    AGGRESSIVE
+    AGGRESSIVE,
+    BUFFED
 }

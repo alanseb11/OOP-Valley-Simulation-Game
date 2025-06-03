@@ -18,6 +18,7 @@ public class Night extends TimeOfDay {
     public void applyEffect(Actor actor, GameMap map) {
         if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actor.removeCapability(Ability.PURCHASE);
+            actor.removeCapability(Status.BUFFED);
         }
 
         if (actor.hasCapability(Ability.ATTACK)) {

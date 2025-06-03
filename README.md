@@ -11,7 +11,7 @@
 ```
 
 2. A day/night system that consists of morning/afternoon/evening/night. Each time of day has different effects on the world. For example, at night, certain enemies are more aggressive, dealing greater damage to the farmer.
-Morning (1 round) -> creatures plagued by crimson rot have their countdown reversed by 1 if they are standing near an Inheritree, performing any action costs the Farmer less stamina?
+Morning (1 round) -> performing any action that originally costs the Farmer stamina is done for 25% less stamina
 Afternoon (1 round) -> merchant offers available only during this period
 Night (2 round) -> certain enemies are more aggressive: Guts deals more damage (+30%) while standing on Blight or in the presence of peaceful creatures or (+15%) anywhere else
 

@@ -18,6 +18,7 @@ public class Afternoon extends TimeOfDay {
     public void applyEffect(Actor actor, GameMap map) {
         if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actor.addCapability(Ability.PURCHASE);
+            actor.removeCapability(Status.BUFFED);
         }
     }
 

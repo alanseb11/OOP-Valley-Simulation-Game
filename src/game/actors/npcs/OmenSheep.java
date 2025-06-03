@@ -83,6 +83,17 @@ public class OmenSheep extends AttackableNPC implements Curable, Producible {
     }
 
     /**
+     * Returns the stamina cost for curing the Omen Sheep.
+     *
+     * @param actor The actor performing the curing action
+     * @return The stamina cost for curing the Omen Sheep
+     */
+    @Override
+    public int getStaminaCost(Actor actor) {
+        return 0; // Omen Sheep does not require stamina to cure
+    }
+
+    /**
      * Produces an {@link OmenSheepEgg} at the location of the {@link OmenSheep}.
      *
      * @param map The map the actor is on.
