@@ -10,9 +10,9 @@ import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.TimeManager;
 import game.actions.UnconsciousAction;
 import game.behaviours.WanderBehaviour;
+import game.time.TimeManager;
 
 /**
  * Abstract class representing a NPC in the game.
@@ -25,11 +25,7 @@ public abstract class NPC extends Actor {
      * The value is the Behaviour itself.
      */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
-
-    /**
-     * A TimeManager instance to manage time-related functionalities for the NPC.
-     */
-    protected final TimeManager timeManager = new TimeManager();
+    private final TimeManager timeManager = new TimeManager();
 
     /**
      * Constructor for NPC.
@@ -56,7 +52,7 @@ public abstract class NPC extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        timeManager.tick();
+        timeManager.tick(this, map);
         
         // If the NPC is not conscious, it cannot perform any actions
         if (!this.isConscious()) {

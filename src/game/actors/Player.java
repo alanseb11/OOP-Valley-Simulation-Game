@@ -8,9 +8,9 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.TimeManager;
 import game.actions.UnconsciousAction;
 import game.capabilities.Status;
+import game.time.TimeManager;
 import game.utilities.FancyMessage;
 import game.weapons.BareFist;
 
@@ -22,7 +22,6 @@ import game.weapons.BareFist;
  */
 public class Player extends Actor {
     private final TimeManager timeManager = new TimeManager();
-
     /**
      * Constructor.
      *
@@ -54,8 +53,9 @@ public class Player extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        display.println("Current time: " + timeManager.getCurrentTime());
-        timeManager.tick();
+        display.println(timeManager.toString());
+        // Tick the time manager to update the time of day
+        timeManager.tick(this, map);
         
         // Check if the Player is conscious
         if (!this.isConscious()) {
