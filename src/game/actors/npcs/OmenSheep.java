@@ -6,7 +6,6 @@ import edu.monash.fit2099.engine.items.Item;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Countdown;
 import game.actions.*;
 import game.actors.npcs.types.AttackableNPC;
 import game.behaviours.*;
@@ -15,6 +14,7 @@ import game.grounds.Inheritree;
 import game.interfaces.Curable;
 import game.interfaces.Producible;
 import game.items.eggs.OmenSheepEgg;
+import game.time.Countdown;
 
 /**
  * A non-player character (NPC) representing an Omen Sheep.

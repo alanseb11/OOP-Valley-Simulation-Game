@@ -11,8 +11,7 @@ import game.actors.Player;
 import game.actors.npcs.*;
 import game.grounds.*;
 import game.items.*;
-import game.items.plants.BloodroseSeed;
-import game.items.plants.InheritreeSeed;
+import game.items.plants.*;
 import game.utilities.FancyMessage;
 
 /**

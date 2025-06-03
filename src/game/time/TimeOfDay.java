@@ -1,6 +1,13 @@
-package game;
+package game.time;
 
-public class TimeOfDay {
+import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.positions.GameMap;
+
+/**
+ * Abstract class representing a time of day in the game.
+ * Each time of day has a name and a duration, and can exert effects on the game map.
+ */
+public abstract class TimeOfDay {
     private String name;
     private Countdown duration;
     
@@ -25,5 +32,7 @@ public class TimeOfDay {
     public void reset() {
         duration.resetCountdown();
     }
+
+    public abstract void applyEffect(Actor actor, GameMap map);
 
 }
