@@ -3,6 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.capabilities.Ability;
 import game.interfaces.Merchant;
 import game.purchaseeffects.MerchantOffer;
 
@@ -33,6 +34,9 @@ public class PurchaseAction extends Action {
      */
     @Override
     public String execute(Actor actor, GameMap map) {
+        if (!actor.hasCapability(Ability.PURCHASE)) {
+            return merchant + " shakes their head. \"These hands do not deal at this hour.\"";
+        }
         return offer.completePurchase(actor, map);
     }
 

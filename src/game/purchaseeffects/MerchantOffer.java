@@ -23,6 +23,7 @@ public class MerchantOffer {
     /**
      * Constructor.
      *
+     * @param merchant    The merchant making the offer
      * @param item        The item to be purchased
      * @param price       The price of the item
      * @param effects     The effect[s] to be applied to the buyer

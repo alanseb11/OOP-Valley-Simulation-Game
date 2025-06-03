@@ -53,7 +53,7 @@ public class Player extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
-        display.println(timeManager.toString());
+        display.println("The sky shifts. It is now " + timeManager.getCurrentTime().toString().toLowerCase() + ".");
         // Tick the time manager to update the time of day
         timeManager.tick(this, map);
         

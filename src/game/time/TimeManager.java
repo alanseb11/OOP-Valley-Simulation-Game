@@ -39,9 +39,4 @@ public class TimeManager {
             dayCycle.get(currentTimeIndex).reset();
         }
     }
-
-    @Override
-    public String toString() {
-        return "The sky shifts. It is now " + getCurrentTime().toString().toLowerCase() + ".";
-    }
 }
