@@ -1,6 +1,7 @@
 package game.time;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.items.Item;
 
 /**
@@ -53,15 +54,6 @@ public class Countdown {
     }
 
     /**
-     * Delays the countdown by a specified number of turns.
-     * 
-     * @param turns The number of turns to delay the countdown
-     */
-    public void delay(int turns) {
-        countdown += turns;
-    }
-
-    /**
      * Applies the countdown effect to the specified actor.
      * This method decrements the countdown and prints a message indicating the actor's remaining turns
      * before an action occurs.
@@ -70,6 +62,7 @@ public class Countdown {
      * @param action The action to be performed when the countdown expires
      */
     public void applyTo(Actor actor, String action) {
+        new Display().println(actor + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + action);
         decrement();
     }
 
@@ -81,6 +74,7 @@ public class Countdown {
      * @param action The action to be performed when the countdown expires
      */
     public void applyTo(Item item, String action) {
+        new Display().println(item + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + action);
         decrement();
     }
 
