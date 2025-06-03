@@ -9,30 +9,41 @@
   MM     ,M   MM     ,M   MM    ,dP' MM     ,M   M     YMM           MM        MM      MM    MM    M     YMM `Mb.     MM  
 .JMMmmmmMMM .JMMmmmmMMM .JMMmmmdP' .JMMmmmmMMM .JML.    YM         .JMML.    .JMML.  .JMML..JMML..JML.    YM   `"bmmmdPY  
 ```
+
 ## REQ3: The Turning of the World
-In the Lands Between, time is not merely a backdrop - it breathes, it judges, and it punishes. Each phase of the day brings shifting fortunes and lurking dread. The Day/Night Cycle shapes the rhythms of all who dwell in the Valley of Inheritree.
+
+> In the Lands Between, time is not merely a backdrop - it breathes, it judges, and it punishes. Each phase of the day brings shifting fortunes and lurking dread. The Day/Night Cycle shapes the rhythms of all who dwell in the Valley of Inheritree.
 
 ### Morning - *The Pale Grace of Dawn*
 As the mist breaks and dew clings to the soil, a strange vigour seeps into the Farmer's bones. In this fleeting hour, effort feels lighter, as if the world itself lends its strength.
-**Effect:** 
-All stamina-consuming actions cost **25% less stamina** for the Farmer.
+
+**Effect:**  
+- All stamina-consuming actions cost **25% less stamina** for the Farmer.
+
+---
 
 ### Afternoon - *The Hour of Trade*
 The sun climbs highest and the clamour of coin echoes across villages and ruins alike. It is only in this sacred window that merchants unroll their wares, eyes gleaming with promises.
-**Effect:** 
-**Merchants only accept trades** during this time.  
-All purchasing attempts outside this window are met with silence... or worse.
+
+**Effect:**  
+- **Merchants only accept trades** during this time.  
+- All purchasing attempts outside this window are met with silence... or worse.
+
+---
 
 ### Night - *Where Enemies Thrive*
 Two rounds of darkness stretch across the land. Candles flicker, shadows stir. And Guts, the cursed hound of vengeance, thrives in it.
-**Effect:**
+
+**Effect:**  
 - At **Night**, certain enemies become **more aggressive**.
 - **Guts** deals:
-  - **+30% damage** when on **Blighted ground** or when **peaceful creatures are nearby**  
+  - **+30% damage** when on **Blighted ground** or when **peaceful creatures are nearby**
   - **+15% damage** elsewhere
 
-## REQ4:
-4. Realistic farming system. For instance, plants need to be watered, grounds can be shovelled, etc.
+---
+
+## REQ4: Realistic Farming System
+For instance, plants need to be watered, grounds can be shovelled, etc.
 Seed A -> Crop A
 once planted on soil, grow after X turns on its own. If watered Y times before it blooms into crop form, then it will produce twice the amount
 
