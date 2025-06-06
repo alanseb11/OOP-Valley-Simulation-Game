@@ -1,7 +1,6 @@
 package game.actors.npcs.boss;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.npcs.types.NPC;
 import game.behaviours.GrowBehaviour;
 import game.capabilities.Status;
@@ -28,9 +27,9 @@ public class BedOfChaos extends NPC implements Growable {
         setIntrinsicWeapon(new BedOfChaosIntrinsicWeapon(this));
 
         Predicate<Actor> isPlayer = actor -> actor.hasCapability(Status.PLAYER);
-        behaviours.put(0, new AttackBehaviour(isPlayer));
+        behaviours.put(10, new AttackBehaviour(isPlayer));
 
-        behaviours.put(1, new GrowBehaviour(this));
+        behaviours.put(20, new GrowBehaviour(this));
 
     }
 
