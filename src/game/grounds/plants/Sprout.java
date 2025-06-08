@@ -1,4 +1,4 @@
-package game.grounds;
+package game.grounds.plants;
 
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actors.Actor;

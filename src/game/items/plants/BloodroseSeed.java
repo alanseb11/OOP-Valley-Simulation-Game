@@ -2,7 +2,7 @@ package game.items.plants;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.grounds.Bloodrose;
+import game.grounds.plants.Bloodrose;
 
 /**
  * A class representing the Bloodrose Seed item.

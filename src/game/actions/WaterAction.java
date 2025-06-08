@@ -3,7 +3,7 @@ package game.actions;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.grounds.Sprout;
+import game.grounds.plants.Sprout;
 
 public class WaterAction extends Action {
     private final Sprout sprout;

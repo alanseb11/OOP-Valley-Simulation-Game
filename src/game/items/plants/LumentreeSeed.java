@@ -1,6 +1,6 @@
 package game.items.plants;
 
-import game.grounds.LumentreeSprout;
+import game.grounds.plants.LumentreeSprout;
 
 public class LumentreeSeed extends Plantable{
     /**

@@ -11,7 +11,7 @@ import game.actions.*;
 import game.actors.npcs.types.AttackableNPC;
 import game.behaviours.*;
 import game.capabilities.Status;
-import game.grounds.Inheritree;
+import game.grounds.plants.Inheritree;
 import game.interfaces.Curable;
 import game.interfaces.Producible;
 import game.items.food.eggs.OmenSheepEgg;

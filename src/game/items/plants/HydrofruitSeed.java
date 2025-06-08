@@ -1,6 +1,6 @@
 package game.items.plants;
 
-import game.grounds.HydrofruitSprout;
+import game.grounds.plants.HydrofruitSprout;
 
 public class HydrofruitSeed extends Plantable{
     /**

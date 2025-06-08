@@ -2,7 +2,7 @@ package game.items.plants;
 
 import edu.monash.fit2099.engine.positions.Location;
 import edu.monash.fit2099.engine.positions.Exit;
-import game.grounds.Inheritree;
+import game.grounds.plants.Inheritree;
 import game.grounds.Soil;
 import game.capabilities.Status;
 
