@@ -19,6 +19,6 @@ public class WaterAction extends Action {
 
     @Override
     public String menuDescription(Actor actor) {
-        return actor + " has watered the " + sprout;
+        return actor + " waters the " + sprout;
     }
 }

@@ -92,8 +92,8 @@ public class Player extends Actor {
         int maxStamina = getAttributeMaximum(BaseActorAttributes.STAMINA);
 
         return String.format(
-            "%s [HP: %d/%d | ST: %d/%d]",
-            playerName, currentHealth, maxHealth, currentStamina, maxStamina
+            "%s [HP: %d/%d | ST: %d/%d | BAL: %d]",
+            playerName, currentHealth, maxHealth, currentStamina, maxStamina, this.getBalance()
         );
     }
 

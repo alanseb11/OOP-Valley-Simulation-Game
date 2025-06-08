@@ -20,7 +20,7 @@ public class HydrofruitSprout extends Sprout {
 
     @Override
     public void tick(Location location) {
-        if (timeUntilGrown.isExpired() && !location.containsAnActor()) {
+        if (timeUntilGrown.isExpired()) {
             grow(location);
         } else {
             timeUntilGrown.applyTo(this, "growing into a Hydrofruit");

@@ -12,7 +12,9 @@ import game.actors.npcs.*;
 import game.grounds.*;
 import game.items.*;
 import game.items.plants.BloodroseSeed;
+import game.items.plants.HydrofruitSeed;
 import game.items.plants.InheritreeSeed;
+import game.items.plants.LumentreeSeed;
 import game.utilities.FancyMessage;
 
 /**
@@ -62,6 +64,8 @@ public class Application {
         world.addPlayer(player, gameMap.at(23, 10));
         player.addItemToInventory(new InheritreeSeed());
         player.addItemToInventory(new BloodroseSeed());
+        player.addItemToInventory(new HydrofruitSeed());
+        player.addItemToInventory(new LumentreeSeed());
 
         // Game setup
         gameMap.at(24, 11).addItem(new Talisman());
