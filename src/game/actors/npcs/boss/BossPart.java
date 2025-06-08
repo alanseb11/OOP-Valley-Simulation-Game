@@ -1,7 +1,13 @@
 package game.actors.npcs.boss;
 
-import game.interfaces.DamageContributor;
+public abstract class BossPart {
+    protected final int damage;
 
-public abstract class BossPart implements DamageContributor {
+    public BossPart(int damage) {
+        this.damage = damage;
+    }
 
+    public int getAttackDamage() {
+        return damage;
+    }
 }

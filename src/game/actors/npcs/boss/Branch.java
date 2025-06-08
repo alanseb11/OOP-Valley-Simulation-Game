@@ -4,11 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import game.interfaces.Growable;
+
 
 public class Branch extends BossPart {
-    private final int damage = 3;
     private final List<BossPart> subParts = new ArrayList<>();
     private final Random random = new Random();
+
+    public Branch() {
+        super(3);
+    }
 
     @Override
     public int getAttackDamage() {
@@ -29,7 +34,7 @@ public class Branch extends BossPart {
                 currentBranch = newBranch;
             } else {
                 currentBranch.subParts.add(new Leaf());
-                boss.increaseHp(5);
+                boss.heal(5);
                 System.out.println("Branch grows a new Leaf!");
 
                 break;

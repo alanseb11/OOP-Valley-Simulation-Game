@@ -7,7 +7,6 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.npcs.types.AttackableNPC;
 import game.behaviours.GrowBehaviour;
 import game.capabilities.Status;
-import game.interfaces.DamageContributor;
 import game.interfaces.Growable;
 import game.weapons.BedOfChaosIntrinsicWeapon;
 import game.behaviours.AttackBehaviour;
@@ -17,11 +16,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
-import static java.nio.file.Files.setAttribute;
-
 public class BedOfChaos extends AttackableNPC implements Growable {
     private final int baseDamage = 25;
-    private final List<DamageContributor> parts = new ArrayList<>();
+    private List<BossPart> parts = new ArrayList<>();
     private final Random random = new Random();
 
     public BedOfChaos() {
@@ -29,9 +26,8 @@ public class BedOfChaos extends AttackableNPC implements Growable {
         behaviours.clear();
         setIntrinsicWeapon(new BedOfChaosIntrinsicWeapon(this));
 
-        Predicate<Actor> isPlayer = actor -> actor.hasCapability(Status.PLAYER);
+        Predicate<Actor> isPlayer = actor -> actor.hasCapability(Status.HOSTILE_TO_ENEMY);
         behaviours.put(10, new AttackBehaviour(isPlayer));
-
         behaviours.put(20, new GrowBehaviour(this));
 
     }
@@ -40,30 +36,25 @@ public class BedOfChaos extends AttackableNPC implements Growable {
         return baseDamage;
     }
 
-    public void increaseHp(int amount) {
-        this.heal(amount);
-    }
-
-
     public int getTotalAttackDamage() {
         int totalDamage = 0;
-        for (DamageContributor part : parts) {
+        for (BossPart part : parts) {
             totalDamage += part.getAttackDamage();
         }
         return totalDamage;
     }
 
     @Override
-    public void grow() {
+    public String grow() {
         if (random.nextBoolean()) {
             Branch branch = new Branch();
-            System.out.println("Bed of Chaos grows a new Branch!");
-            branch.grow(this);
             parts.add(branch);
+            branch.grow(this);
+            return this + "grew a new Branch!";
         } else {
             parts.add(new Leaf());
             this.heal(5);
-            System.out.println("Bed of Chaos grows a new Leaf!");
+            return this + "grew a new Leaf!";
         }
     }
 
@@ -72,7 +63,7 @@ public class BedOfChaos extends AttackableNPC implements Growable {
         // Get the map containing BedOfChaos
         for (Exit exit : map.locationOf(this).getExits()) {
             Actor target = exit.getDestination().getActor();
-            if (target != null && target.hasCapability(Status.PLAYER)) {
+            if (target != null && target.hasCapability(Status.HOSTILE_TO_ENEMY)) {
                 return false;
             }
         }
