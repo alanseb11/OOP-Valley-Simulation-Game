@@ -1,9 +1,10 @@
 package game.actors.npcs.boss;
 
 import edu.monash.fit2099.engine.actors.Actor;
+import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import game.actors.npcs.types.NPC;
+import game.actors.npcs.types.AttackableNPC;
 import game.behaviours.GrowBehaviour;
 import game.capabilities.Status;
 import game.interfaces.DamageContributor;
@@ -16,8 +17,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Predicate;
 
-public class BedOfChaos extends NPC implements Growable {
-    private int hp = 1000;
+import static java.nio.file.Files.setAttribute;
+
+public class BedOfChaos extends AttackableNPC implements Growable {
     private final int baseDamage = 25;
     private final List<DamageContributor> parts = new ArrayList<>();
     private final Random random = new Random();
@@ -39,7 +41,7 @@ public class BedOfChaos extends NPC implements Growable {
     }
 
     public void increaseHp(int amount) {
-        hp += amount;
+        this.heal(amount);
     }
 
 
@@ -60,7 +62,7 @@ public class BedOfChaos extends NPC implements Growable {
             parts.add(branch);
         } else {
             parts.add(new Leaf());
-            hp += 5;
+            this.heal(5);
             System.out.println("Bed of Chaos grows a new Leaf!");
         }
     }
@@ -71,15 +73,15 @@ public class BedOfChaos extends NPC implements Growable {
         for (Exit exit : map.locationOf(this).getExits()) {
             Actor target = exit.getDestination().getActor();
             if (target != null && target.hasCapability(Status.PLAYER)) {
-                return false;  // Player nearby! Can't grow.
+                return false;
             }
         }
-        return true;  // No player nearby.
+        return true;
     }
 
     @Override
     public String toString() {
-        return String.format("Bed of Chaos [HP: %d, Parts: %d]", hp, parts.size());
+        return String.format("Bed of Chaos [HP: %d, Parts: %d]", this.getAttribute(BaseActorAttributes.HEALTH) , parts.size());
     }
 
 
