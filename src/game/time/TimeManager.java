@@ -22,7 +22,6 @@ public class TimeManager {
         dayCycle.add(new Morning());
         dayCycle.add(new Afternoon());
         dayCycle.add(new Night());
-        this.currentTimeIndex = 0;
     }
 
     /**
@@ -47,14 +46,11 @@ public class TimeManager {
     
             // Move to the next time of day
             currentTimeIndex = (currentTimeIndex + 1) % dayCycle.size();
-            TimeOfDay nextTime = dayCycle.get(currentTimeIndex);
-            
-            nextTime.applyEffect(actor);
-            nextTime.tick();
-        } else {
-            currentTime.applyEffect(actor);
-            currentTime.tick();
+            currentTime = getCurrentTime();
         }
+
+        currentTime.applyEffect(actor);
+        currentTime.tick();
         
     }
 }
