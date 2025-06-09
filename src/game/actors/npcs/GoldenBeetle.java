@@ -17,7 +17,7 @@ import game.behaviours.WanderBehaviour;
 import game.behaviours.CountdownBehaviour;
 import game.interfaces.Eatable;
 import game.interfaces.Producible;
-import game.items.eggs.GoldenEgg;
+import game.items.food.eggs.GoldenEgg;
 import game.time.Countdown;
 
 /**
@@ -85,7 +85,7 @@ public class GoldenBeetle extends AttackableNPC implements Eatable, Producible {
      * <p>Effects on the consumer:
      * <ul>
      *     <li>Restores 15 HP</li>
-     *     <li>Grants 1000 runes if the actor has {@link Status#PLAYER}</li>
+     *     <li>Grants 1000 runes if the actor is a player</li>
      * </ul>
      * The beetle is removed from the map after consumption.
      * </p>

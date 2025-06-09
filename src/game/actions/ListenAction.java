@@ -6,7 +6,7 @@ import edu.monash.fit2099.engine.positions.GameMap;
 import game.actors.npcs.types.MonologuingNPC;
 
 /**
- * Represents an action where an {@link Actor} listens to a {@link Monologuer}.
+ * Represents an action where an {@link Actor} listens to a {@link MonologuingNPC}.
  * This action allows the actor to hear the monologue of the specified monologuer.
  */
 public class ListenAction extends Action {

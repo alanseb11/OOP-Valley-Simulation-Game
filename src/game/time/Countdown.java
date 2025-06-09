@@ -84,7 +84,6 @@ public class Countdown {
      * @param action The action to be performed when the countdown expires
      */
     public void applyTo(Ground ground, String action) {
-        new Display().println(ground + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + action);
         decrement();
     }
 }

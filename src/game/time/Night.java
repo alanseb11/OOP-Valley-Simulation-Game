@@ -5,7 +5,7 @@ import game.capabilities.Ability;
 import game.capabilities.Status;
 
 /**
- * Represents the night time of day in the game.
+ * Represents the nighttime of day in the game.
  * Night lasts for 2 turns and applies specific effects to actors.
  */
 public class Night extends TimeOfDay {

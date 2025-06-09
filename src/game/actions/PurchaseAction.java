@@ -4,15 +4,14 @@ import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.capabilities.Ability;
-import game.interfaces.Merchant;
 import game.purchaseeffects.MerchantOffer;
 
 /**
  * Represents an action to purchase an item from a Merchant.
  */
 public class PurchaseAction extends Action {
-    private MerchantOffer offer;
-    private Merchant merchant;
+    private final MerchantOffer offer;
+    private final Actor merchant;
 
     /**
      * Constructor for the PurchaseAction.
@@ -20,7 +19,7 @@ public class PurchaseAction extends Action {
      * @param offer The offer to be purchased
      * @param merchant The Merchant selling the offer
      */
-    public PurchaseAction(MerchantOffer offer, Merchant merchant) {
+    public PurchaseAction(MerchantOffer offer, Actor merchant) {
         this.offer = offer;
         this.merchant = merchant;
     }

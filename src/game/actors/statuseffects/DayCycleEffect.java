@@ -17,7 +17,7 @@ public class DayCycleEffect extends StatusEffect {
     /**
      * Constructs a DayCycleEffect for a given Daybound entity.
      *
-     * @param Daybound the entity that is bound to the day/night cycle and provides access to the time manager
+     * @param daybound the entity that is bound to the day/night cycle and provides access to the time manager
      */
     public DayCycleEffect(Daybound daybound) {
         super("Day cycle's effect");

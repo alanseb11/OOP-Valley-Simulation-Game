@@ -13,8 +13,8 @@ import game.capabilities.Status;
 import game.grounds.plants.Inheritree;
 import game.interfaces.Curable;
 import game.interfaces.Producible;
-import game.items.eggs.OmenSheepEgg;
 import game.time.Countdown;
+import game.items.food.eggs.OmenSheepEgg;
 
 /**
  * A non-player character (NPC) representing an Omen Sheep.
