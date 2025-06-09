@@ -20,6 +20,7 @@ public class HydrofruitSprout extends Sprout {
 
     @Override
     public void tick(Location location) {
+        // Checks if the countdown for growth is expired
         if (timeUntilGrown.isExpired()) {
             grow(location);
         } else {

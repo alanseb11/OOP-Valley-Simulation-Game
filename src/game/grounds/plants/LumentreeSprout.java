@@ -2,20 +2,38 @@ package game.grounds.plants;
 
 import edu.monash.fit2099.engine.positions.Location;
 import game.capabilities.Status;
+import game.interfaces.Daybound;
+import game.time.*;
 
-public class LumentreeSprout extends Sprout {
+public class LumentreeSprout extends Sprout implements Daybound {
+    private final Countdown timeUntilGrown = new Countdown(10);
+    private final TimeManager timeManager = new TimeManager();
+
     /**
      * Constructor.
      */
     public LumentreeSprout() {
         super('l', "LumentreeSprout");
         this.addCapability(Status.PLANTED);
+
+        timeManager.add(new Morning());
+        timeManager.add(new Afternoon());
+        timeManager.add(new Night());
     }
 
     @Override
     public void tick(Location location) {
-        // Implement later using day night cycle
-        super.tick(location);
+        // Applies the tick cycle of the time manager
+        this.getTimeManager().tick();
+        // Only grows when it's not nighttime
+        if (!this.getTimeManager().getCurrentTime().hasCapability(Status.NIGHT)) {
+            // Checks if the countdown for growth is expired
+            if (timeUntilGrown.isExpired()) {
+                grow(location);
+            } else {
+                timeUntilGrown.applyTo(this, "growing into a Lumentree");
+            }
+        }
     }
 
     @Override
@@ -23,4 +41,8 @@ public class LumentreeSprout extends Sprout {
         location.setGround(new Lumentree());
     }
 
+    @Override
+    public TimeManager getTimeManager() {
+        return timeManager;
+    }
 }
