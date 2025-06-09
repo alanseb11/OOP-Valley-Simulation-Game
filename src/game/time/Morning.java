@@ -1,7 +1,6 @@
 package game.time;
 
 import edu.monash.fit2099.engine.actors.Actor;
-import edu.monash.fit2099.engine.positions.GameMap;
 import game.capabilities.Ability;
 import game.capabilities.Status;
 
@@ -26,7 +25,7 @@ public class Morning extends TimeOfDay {
      * @param actor the actor to apply the effect to
      * @param map   the game map where the effect is applied
      */
-    public void applyEffect(Actor actor, GameMap map) {
+    public void applyEffect(Actor actor) {
         if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
             actor.addCapability(Status.BUFFED);
             actor.removeCapability(Ability.PURCHASE);
