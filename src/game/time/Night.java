@@ -15,6 +15,7 @@ public class Night extends TimeOfDay {
      */
     public Night() {
         super("Night", new Countdown(2));
+        this.addCapability(Status.NIGHT);
     }
 
     /**

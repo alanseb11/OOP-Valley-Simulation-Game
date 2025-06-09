@@ -80,6 +80,8 @@ public class Application {
         world.addPlayer(player, limgraveMap.at(23, 10));
         player.addItemToInventory(new InheritreeSeed());
         player.addItemToInventory(new BloodroseSeed());
+        player.addItemToInventory(new HydrofruitSeed());
+        player.addItemToInventory(new LumentreeSeed());
         player.addBalance(10000);
 
 

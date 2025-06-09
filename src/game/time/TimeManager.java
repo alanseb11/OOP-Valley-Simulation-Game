@@ -28,22 +28,39 @@ public class TimeManager {
     }
 
     /**
-     * Manages the ticking of time in the game.
-     * 
+     * Manages the ticking of time for actors in the game.
+     *
      * @param actor     the actor to apply the effect to
      */
     public void tick(Actor actor) {
         TimeOfDay currentTime = getCurrentTime();
-    
+
         if (currentTime.hasPassed()) {
             currentTime.reset();
-    
+
             // Move to the next time of day
             currentTimeIndex = (currentTimeIndex + 1) % dayCycle.size();
             currentTime = getCurrentTime();
         }
 
         currentTime.applyEffect(actor);
+        currentTime.tick();
+    }
+
+    /**
+     * Manages the ticking of time in the game.
+     */
+    public void tick() {
+        TimeOfDay currentTime = getCurrentTime();
+
+        if (currentTime.hasPassed()) {
+            currentTime.reset();
+
+            // Move to the next time of day
+            currentTimeIndex = (currentTimeIndex + 1) % dayCycle.size();
+            currentTime = getCurrentTime();
+        }
+
         currentTime.tick();
     }
 

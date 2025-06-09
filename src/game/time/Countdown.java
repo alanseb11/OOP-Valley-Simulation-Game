@@ -2,6 +2,7 @@ package game.time;
 
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.items.Item;
+import edu.monash.fit2099.engine.positions.Ground;
 
 /**
  * Represents a countdown that decreases over time.
@@ -75,4 +76,15 @@ public class Countdown {
         decrement();
     }
 
+    /**
+     * Applies the countdown effect to the specified item.
+     * This method decrements the countdown and prints a message indicating the remaining turns.
+     *
+     * @param ground The ground to which the countdown is applied
+     * @param action The action to be performed when the countdown expires
+     */
+    public void applyTo(Ground ground, String action) {
+        new Display().println(ground + " has " + countdown + (countdown == 1 ? " turn" : " turns") + " left before " + action);
+        decrement();
+    }
 }

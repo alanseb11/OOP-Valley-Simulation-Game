@@ -1,4 +1,4 @@
-package game.grounds;
+package game.grounds.plants;
 
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.Location;

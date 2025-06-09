@@ -17,7 +17,7 @@
 ### Morning - *The Pale Grace of Dawn*
 As the mist breaks and dew clings to the soil, a strange vigour seeps into the Farmer's bones. In this fleeting hour, effort feels lighter, as if the world itself lends its strength.
 
-**Effect:**  
+**Effect:**
 - All stamina-consuming actions cost **25% less stamina** for the Farmer.
 
 ---
@@ -25,8 +25,8 @@ As the mist breaks and dew clings to the soil, a strange vigour seeps into the F
 ### Afternoon - *The Hour of Trade*
 The sun climbs highest and the clamour of coin echoes across villages and ruins alike. It is only in this sacred window that merchants unroll their wares, eyes gleaming with promises.
 
-**Effect:**  
-- **Merchants only accept trades** during this time.  
+**Effect:**
+- **Merchants only accept trades** during this time.
 - All purchasing attempts outside this window are met with silence... or worse.
 
 ---
@@ -34,22 +34,51 @@ The sun climbs highest and the clamour of coin echoes across villages and ruins 
 ### Night - *Where Enemies Thrive*
 Two rounds of darkness stretch across the land. Candles flicker, shadows stir. And Guts, the cursed hound of vengeance, thrives in it.
 
-**Effect:**  
+**Effect:**
 - At **Night**, the Farmer and certain enemies become **more aggressive**.
 - **Guts** deals:
-  - **+30% damage** when on or surrounded by **Blighted ground**
-  - **+15% damage** elsewhere
+    - **+30% damage** when on or surrounded by **Blighted ground**
+    - **+15% damage** elsewhere
 - **Farmer** can:
-  - Attack Guts with intrinsic weapon
+    - Attack Guts with intrinsic weapon
 
 ---
 
 ## REQ4: Realistic Farming System
-For instance, plants need to be watered, grounds can be shovelled, etc.
-Seed A -> Crop A
-once planted on soil, grow after X turns on its own. If watered Y times before it blooms into crop form, then it will produce twice the amount
 
-Seed B -> Crop B
-once planted, it will turn into Crop B after X turns if it is during morning or afternoon. It doesn't grow during night. However, once fully grown, it only produces during the night
+> In the Valley of Inheritree, crops are not mere yields — they are covenants with time, water, and shadow. Every seed carries a silent potential, waiting for the right breath of life to awaken its purpose. Tend them with care, for the ground remembers neglect.
 
-Harvest the produce and sell the produce to Merchant
+### Crop A - *HydrofruitSeed -> Hydrofruit*
+From the shallows of the sunken groves comes the HydrofruitSeed — a strange kernel that drinks not thirstily, but wisely.
+
+**Growth:**
+- Once planted, **Hydrofruit** grows after **7** turns, without the need for water.
+- If watered **3** times before blooming, the plant yields **double** its natural bounty.
+
+**Effect:**
+- Base yield: 1 Hydrofruit
+- With water: 2 Hydrofruit
+
+---
+
+### Crop B - *LumentreeSeed -> Lumentree*
+A tree born of dusk light and hushed winds. It does not abide the dark to grow — yet in the dark, it bears luminous gifts.
+
+**Growth:**
+- Once planted, the **Lumentree** reaches maturity after **10** turns, but only during **Morning** or **Afternoon**.
+- Time spent in **Night** does **not count** toward its growth.
+
+**Harvest:**
+- Once fully grown, the **Lumentree** bears **1 Lumenfruit** every **5** turns, but only during the **Night**.
+- The tree does not yield during **daylight**, no matter how long the wait.
+
+---
+
+### Commerce of the Crop
+Once gathered, both Hydrofruit and Lumenfruit become tokens of value — sought after by merchants who stir only during the Hour of Trade.
+
+**Effect:**
+- Harvested crops can be **sold** to **merchants**.
+
+
+

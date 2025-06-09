@@ -1,15 +1,16 @@
 package game.time;
 
+import edu.monash.fit2099.engine.GameEntity;
 import edu.monash.fit2099.engine.actors.Actor;
 
 /**
  * Abstract class representing a time of day in the game.
  * Each time of day has a name and a duration, and can exert effects on the game map.
  */
-public abstract class TimeOfDay {
+public abstract class TimeOfDay extends GameEntity {
     private String name;
     private Countdown duration;
-    
+
     /**
      * Constructor for TimeOfDay.
      *
@@ -34,7 +35,7 @@ public abstract class TimeOfDay {
     /**
      * Checks if the time of day has passed.
      * A time of day is considered passed if its duration has expired.
-     * 
+     *
      * @return true if the time of day has passed, false otherwise
      */
     public boolean hasPassed() {

@@ -15,5 +15,9 @@ public enum Status {
     BLESSED_BY_GRACE,
     FOLLOWABLE,
     AGGRESSIVE,
-    BUFFED
+    BUFFED,
+    MERCHANT,
+    MORNING,
+    AFTERNOON,
+    NIGHT
 }
