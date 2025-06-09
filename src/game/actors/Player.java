@@ -9,7 +9,11 @@ import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.displays.Menu;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.UnconsciousAction;
+import game.actors.statuseffects.DayCycleEffect;
+import game.capabilities.Ability;
 import game.capabilities.Status;
+import game.interfaces.Daybound;
+import game.time.*;
 import game.utilities.FancyMessage;
 import game.weapons.BareFist;
 
@@ -19,7 +23,9 @@ import game.weapons.BareFist;
  * The Player is a controllable actor in the game. It has attributes such as health and stamina,
  * and can perform actions based on user input via a menu.
  */
-public class Player extends Actor {
+public class Player extends Actor implements Daybound {
+    private TimeManager timeManager = new TimeManager();
+    
     /**
      * Constructor.
      *
@@ -30,10 +36,16 @@ public class Player extends Actor {
      */
     public Player(String name, char displayChar, int hitPoints, int stamina) {
         super(name, displayChar, hitPoints);
+        this.setIntrinsicWeapon(new BareFist(damageMultiplier));
         this.addAttribute(BaseActorAttributes.STAMINA, new BaseActorAttribute(stamina));
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Status.FOLLOWABLE);
-        this.setIntrinsicWeapon(new BareFist());
+        this.addCapability(Ability.ATTACK);
+        
+        timeManager.add(new Morning());
+        timeManager.add(new Afternoon());
+        timeManager.add(new Night());
+        this.addStatusEffect(new DayCycleEffect(this));
     }
 
     /**
@@ -51,6 +63,10 @@ public class Player extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+        display.println("The sky shifts. It is now " + timeManager.getCurrentTime().toString().toLowerCase() + ".");
+        // Tick the time manager to update the time of day
+        // timeManager.tick(this, map);
+        
         // Check if the Player is conscious
         if (!this.isConscious()) {
             // Oh no! "YOU DIED" message
@@ -96,4 +112,11 @@ public class Player extends Actor {
         );
     }
 
+    public float getDamageMultiplier() {
+        return this.damageMultiplier;
+    }
+
+    public TimeManager getTimeManager() {
+        return timeManager;
+    }
 }

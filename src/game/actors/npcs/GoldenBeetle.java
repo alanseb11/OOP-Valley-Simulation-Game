@@ -1,17 +1,13 @@
 package game.actors.npcs;
 
-import java.util.HashMap;
-import java.util.Map;
 import edu.monash.fit2099.engine.actors.Actor;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
-import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.demo.huntsman.AttackAction;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Location;
-import game.Countdown;
 import game.actions.EatAction;
 import game.actions.ProduceAction;
 import game.actors.npcs.types.AttackableNPC;
@@ -22,6 +18,7 @@ import game.behaviours.CountdownBehaviour;
 import game.interfaces.Eatable;
 import game.interfaces.Producible;
 import game.items.eggs.GoldenEgg;
+import game.time.Countdown;
 
 /**
  * Represents a Golden Beetle NPC in the game world.
@@ -40,7 +37,6 @@ import game.items.eggs.GoldenEgg;
  * This class implements {@link Eatable} and {@link Producible} to enable custom logic for consumption and egg production.
  */
 public class GoldenBeetle extends AttackableNPC implements Eatable, Producible {
-    private final Map<Integer, Behaviour> behaviours = new HashMap<>();
   
     /**
      * Constructs a Golden Beetle with 25 HP.

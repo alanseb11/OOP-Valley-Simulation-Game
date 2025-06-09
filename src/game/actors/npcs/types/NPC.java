@@ -11,19 +11,34 @@ import edu.monash.fit2099.engine.actors.Behaviour;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.GameMap;
 import game.actions.UnconsciousAction;
+import game.actors.statuseffects.DayCycleEffect;
+import game.behaviours.BehaviourType;
+import game.behaviours.PrioritisedBehaviourType;
 import game.behaviours.WanderBehaviour;
+import game.interfaces.Daybound;
+import game.time.*;
 
 /**
  * Abstract class representing a NPC in the game.
  * This class extends the Actor class and provides basic functionality for NPCs.
  */
-public abstract class NPC extends Actor {
+public abstract class NPC extends Actor implements Daybound {
     /**
      * A map of behaviours that the NPC can perform.
      * The key is an integer representing the priority of the behaviour.
      * The value is the Behaviour itself.
      */
     protected Map<Integer, Behaviour> behaviours = new HashMap<>();
+    
+    /**
+     * The TimeManager instance that manages the time-related actions for the NPC.
+     */
+    protected final TimeManager timeManager = new TimeManager();
+
+    /**
+     * The strategy used to select behaviors.
+     */
+    protected BehaviourType behaviourType;
 
     /**
      * Constructor for NPC.
@@ -35,8 +50,25 @@ public abstract class NPC extends Actor {
     public NPC(String name, char displayChar, int hitPoints) {
         super(name, displayChar, hitPoints);
         
+        // Default to prioritized behavior strategy
+        this.behaviourType = new PrioritisedBehaviourType();
+        
         // Registering the behaviours for the NPC
         behaviours.put(99, new WanderBehaviour());
+
+        timeManager.add(new Morning());
+        timeManager.add(new Afternoon());
+        timeManager.add(new Night());
+        this.addStatusEffect(new DayCycleEffect(this));
+    }
+
+    /**
+     * Sets the behavior selection strategy for this NPC.
+     *
+     * @param strategy The strategy to use for selecting behaviors
+     */
+    public void setBehaviour(BehaviourType strategy) {
+        this.behaviourType = strategy;
     }
 
     /**
@@ -50,18 +82,22 @@ public abstract class NPC extends Actor {
      */
     @Override
     public Action playTurn(ActionList actions, Action lastAction, GameMap map, Display display) {
+    
         // If the NPC is not conscious, it cannot perform any actions
         if (!this.isConscious()) {
             return new UnconsciousAction();
         }
 
-        // Perform the behaviours
-        for (Behaviour behaviour : behaviours.values()) {
-            Action action = behaviour.getAction(this, map);
-            if (action != null) return action;
+        // Use the current strategy to select an action
+        Action action = behaviourType.selectAction(behaviours, this, map);
+        if (action != null) {
+            return action;
         }
 
         return new DoNothingAction();
     }
 
+    public TimeManager getTimeManager() {
+        return timeManager;
+    }
 }
