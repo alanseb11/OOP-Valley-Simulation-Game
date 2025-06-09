@@ -16,7 +16,7 @@ import game.behaviours.BehaviourType;
 import game.behaviours.PrioritisedBehaviourType;
 import game.behaviours.WanderBehaviour;
 import game.interfaces.Daybound;
-import game.time.TimeManager;
+import game.time.*;
 
 /**
  * Abstract class representing a NPC in the game.
@@ -56,6 +56,9 @@ public abstract class NPC extends Actor implements Daybound {
         // Registering the behaviours for the NPC
         behaviours.put(99, new WanderBehaviour());
 
+        timeManager.add(new Morning());
+        timeManager.add(new Afternoon());
+        timeManager.add(new Night());
         this.addStatusEffect(new DayCycleEffect(this));
     }
 

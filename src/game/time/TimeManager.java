@@ -15,14 +15,8 @@ public class TimeManager {
 
     /**
      * Constructor for TimeManager.
-     * Initialises the day cycle with different times of day.
      */
-    public TimeManager() {
-        // Initialise the day cycle with different times of day
-        dayCycle.add(new Morning());
-        dayCycle.add(new Afternoon());
-        dayCycle.add(new Night());
-    }
+    public TimeManager() {}
 
     /**
      * Gets the current time of day.
@@ -51,6 +45,13 @@ public class TimeManager {
 
         currentTime.applyEffect(actor);
         currentTime.tick();
-        
+    }
+
+    /**
+     * Adds a {@link TimeOfDay} to the day cycle
+     * @param phase
+     */
+    public void add(TimeOfDay phase) {
+        dayCycle.add(phase);
     }
 }

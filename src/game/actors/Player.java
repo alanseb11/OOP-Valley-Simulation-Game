@@ -13,7 +13,7 @@ import game.actors.statuseffects.DayCycleEffect;
 import game.capabilities.Ability;
 import game.capabilities.Status;
 import game.interfaces.Daybound;
-import game.time.TimeManager;
+import game.time.*;
 import game.utilities.FancyMessage;
 import game.weapons.BareFist;
 
@@ -24,7 +24,7 @@ import game.weapons.BareFist;
  * and can perform actions based on user input via a menu.
  */
 public class Player extends Actor implements Daybound {
-    private final TimeManager timeManager = new TimeManager();
+    private TimeManager timeManager = new TimeManager();
     
     /**
      * Constructor.
@@ -41,6 +41,10 @@ public class Player extends Actor implements Daybound {
         this.addCapability(Status.HOSTILE_TO_ENEMY);
         this.addCapability(Status.FOLLOWABLE);
         this.addCapability(Ability.ATTACK);
+        
+        timeManager.add(new Morning());
+        timeManager.add(new Afternoon());
+        timeManager.add(new Night());
         this.addStatusEffect(new DayCycleEffect(this));
     }
 
