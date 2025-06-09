@@ -1,6 +1,5 @@
 package game.actors.npcs;
 
-import edu.monash.fit2099.demo.huntsman.AttackAction;
 import edu.monash.fit2099.engine.actions.Action;
 import edu.monash.fit2099.engine.actions.ActionList;
 import edu.monash.fit2099.engine.actions.DoNothingAction;
@@ -10,6 +9,7 @@ import edu.monash.fit2099.engine.actors.attributes.BaseActorAttributes;
 import edu.monash.fit2099.engine.displays.Display;
 import edu.monash.fit2099.engine.positions.Exit;
 import edu.monash.fit2099.engine.positions.GameMap;
+import game.actions.AttackAction;
 import game.actions.UnconsciousAction;
 import game.actors.npcs.types.MonologuingNPC;
 import game.behaviours.AttackBehaviour;
