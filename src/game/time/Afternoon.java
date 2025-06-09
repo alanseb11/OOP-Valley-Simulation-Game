@@ -23,7 +23,6 @@ public class Afternoon extends TimeOfDay {
      * and buffed actors lose their buffed capability.
      *
      * @param actor the actor to apply the effect to
-     * @param map   the game map where the effect is applied
      */
     @Override
     public void applyEffect(Actor actor) {

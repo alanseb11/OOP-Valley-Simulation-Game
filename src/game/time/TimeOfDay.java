@@ -61,7 +61,6 @@ public abstract class TimeOfDay {
      * This method should be implemented by subclasses to define specific effects.
      *
      * @param actor the actor to apply the effect to
-     * @param map the game map where the effect is applied
      */
     public abstract void applyEffect(Actor actor);
 

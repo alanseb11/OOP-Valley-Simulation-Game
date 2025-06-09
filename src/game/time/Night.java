@@ -23,7 +23,6 @@ public class Night extends TimeOfDay {
      * and aggressive actors gain their aggressive capability.
      *
      * @param actor the actor to apply the effect to
-     * @param map   the game map where the effect is applied
      */
     @Override
     public void applyEffect(Actor actor) {

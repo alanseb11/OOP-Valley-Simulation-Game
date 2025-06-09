@@ -38,7 +38,6 @@ public class TimeManager {
      * Manages the ticking of time in the game.
      * 
      * @param actor     the actor to apply the effect to
-     * @param gameMap   the game map where the effect is applied
      */
     public void tick(Actor actor) {
         TimeOfDay currentTime = getCurrentTime();

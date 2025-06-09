@@ -23,7 +23,6 @@ public class Morning extends TimeOfDay {
      * and aggressive actors lose their aggressive capability.
      *
      * @param actor the actor to apply the effect to
-     * @param map   the game map where the effect is applied
      */
     public void applyEffect(Actor actor) {
         if (actor.hasCapability(Status.HOSTILE_TO_ENEMY)) {
